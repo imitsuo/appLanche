@@ -1,0 +1,8 @@
+/home/marcelo/projetos/appLanche/Services/bin/Debug/netstandard2.0/appLanche.Services.deps.json
+/home/marcelo/projetos/appLanche/Services/bin/Debug/netstandard2.0/appLanche.Services.dll
+/home/marcelo/projetos/appLanche/Services/bin/Debug/netstandard2.0/appLanche.Services.pdb
+/home/marcelo/projetos/appLanche/Services/obj/Debug/netstandard2.0/appLanche.Services.csproj.CoreCompileInputs.cache
+/home/marcelo/projetos/appLanche/Services/obj/Debug/netstandard2.0/appLanche.Services.AssemblyInfoInputs.cache
+/home/marcelo/projetos/appLanche/Services/obj/Debug/netstandard2.0/appLanche.Services.AssemblyInfo.cs
+/home/marcelo/projetos/appLanche/Services/obj/Debug/netstandard2.0/appLanche.Services.dll
+/home/marcelo/projetos/appLanche/Services/obj/Debug/netstandard2.0/appLanche.Services.pdb

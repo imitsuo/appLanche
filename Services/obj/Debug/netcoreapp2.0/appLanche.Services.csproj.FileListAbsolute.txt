@@ -1,0 +1,12 @@
+/home/marcelo/projetos/appLanche/Services/obj/Debug/netcoreapp2.0/appLanche.Services.csproj.CoreCompileInputs.cache
+/home/marcelo/projetos/appLanche/Services/obj/Debug/netcoreapp2.0/appLanche.Services.AssemblyInfoInputs.cache
+/home/marcelo/projetos/appLanche/Services/obj/Debug/netcoreapp2.0/appLanche.Services.AssemblyInfo.cs
+/home/marcelo/projetos/appLanche/Services/bin/Debug/netcoreapp2.0/appLanche.Services.deps.json
+/home/marcelo/projetos/appLanche/Services/bin/Debug/netcoreapp2.0/appLanche.Services.dll
+/home/marcelo/projetos/appLanche/Services/bin/Debug/netcoreapp2.0/appLanche.Services.pdb
+/home/marcelo/projetos/appLanche/Services/obj/Debug/netcoreapp2.0/appLanche.Services.dll
+/home/marcelo/projetos/appLanche/Services/obj/Debug/netcoreapp2.0/appLanche.Services.pdb
+/home/marcelo/projetos/appLanche/Services/bin/Debug/netcoreapp2.0/appLanche.Domain.dll
+/home/marcelo/projetos/appLanche/Services/bin/Debug/netcoreapp2.0/appLanche.Infrastructure.dll
+/home/marcelo/projetos/appLanche/Services/bin/Debug/netcoreapp2.0/appLanche.Domain.pdb
+/home/marcelo/projetos/appLanche/Services/bin/Debug/netcoreapp2.0/appLanche.Infrastructure.pdb
