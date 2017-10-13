@@ -39,7 +39,7 @@ namespace appLanche.Tests
             var desconto = calculadoraPromocao.CalculaDesconto(itemPed);
             var valorTotal = itemPed.Valor - desconto;
             
-            Assert.True(valorTotal.Equals(new decimal(14.90)), "Valor Deve Ser 14.90 o valor eh " + valorTotal);
+            Assert.True(valorTotal.Equals(new decimal(14.90)), "Valor Deve Ser 14.90 o valor eh " + valorTotal);            
         }
 
         [Fact]
@@ -73,7 +73,7 @@ namespace appLanche.Tests
         
 
         [Fact]
-        public void NaoPossuiDescontoPromocaoLight()
+        public void NaoPossuiDescontoPromocao()
         {
             var ingredientes = new List<Ingrediente>();
             ingredientes.Add(bacon);

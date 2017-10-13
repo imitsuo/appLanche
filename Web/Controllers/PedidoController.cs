@@ -22,8 +22,7 @@ namespace appLanche.Web.Controllers
             var model = new PedidoModel();
             model.Lanches = pedidoService.ListarLanches();
 
-            return View(model);
-            //return View(ListarLanches());
+            return View(model);            
         }
 
         public IActionResult MontarPedido(int? id)
@@ -44,21 +43,46 @@ namespace appLanche.Web.Controllers
         }
 
         public List<Lanche> ListarLanches()
-        {
-            var model = new List<LancheModel>();
-            var lanches = pedidoService.ListarLanches();
-
-            //lanches.ForEach(l => model.Add( new LancheModel{Id = l.ID, Nome = l.Nome}));
-            //return model;
-
+        {            
             return pedidoService.ListarLanches();            
         }
 
         [HttpPost]
-        public MontarPedidoModel CalcularPreco(MontarPedidoModel model)
+        public ItemDoPedido CalcularPreco(MontarPedidoModel model)
         {
+            var lanche = pedidoService.ObterLanche(model.LancheId).FirstOrDefault();
+            
+            if(lanche == null)
+                throw new Exception("Lanche nao encontrado");
 
-            return model;
+            var item = new ItemDoPedido(lanche);
+
+            var ingredientes = this.pedidoService.ListarIngredientes();
+
+            model.IngredientesAdicionais.ForEach(a => 
+                {
+                    item.AdicionarIngrediente(
+                        ingredientes.First(x => x.Id == int.Parse(a))
+                        );
+                }
+            );
+            
+            model.IngredientesRemovidos.ForEach(a => 
+                {
+                    item.RemoverIngrediente(
+                        ingredientes.First(x => x.Id == int.Parse(a))
+                        );
+                }
+            );
+
+
+            return pedidoService.CalcularValorDoPedido(item);
+        }
+
+        [HttpPost]
+        public ItemDoPedido GerarPedido(ItemDoPedido item)
+        {
+            return pedidoService.GerarPedido(item);
         }
 
     }

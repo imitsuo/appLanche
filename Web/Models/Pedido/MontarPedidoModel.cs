@@ -11,7 +11,7 @@ namespace appLanche.Web.Models
             this.IngredientesRemovidos = new List<string>();
             this.IngredientesAdicionais = new List<string>();
         }
-        public string LancheId { get; set; }
+        public int LancheId { get; set; }
 
         public List<string> IngredientesRemovidos {get; set;}
 

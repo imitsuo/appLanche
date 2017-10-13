@@ -55,10 +55,9 @@ namespace appLanche.Tests
             var promocao = new Promocao("Light", alface, bacon, new decimal(0.1));
 
             var calculadoraPromocao = new CalculaPromocaoLigth(promocao);
-            var desconto = calculadoraPromocao.CalculaDesconto(itemPed);
-            var valorTotal = itemPed.Valor - desconto;
+            var desconto = calculadoraPromocao.CalculaDesconto(itemPed);                      
             
-            Assert.True(valorTotal.Equals(new decimal(4.41)), "Valor Deve Ser 4.41 o valor eh " + valorTotal);            
+            Assert.True(new decimal(0.1).Equals(desconto / itemPed.Valor), "Valor Deve Ser 0.1 o valor eh " + desconto);
         }
 
         [Fact]
@@ -78,9 +77,8 @@ namespace appLanche.Tests
 
             var calculadoraPromocao = new CalculaPromocaoLigth(promocao);
             var desconto = calculadoraPromocao.CalculaDesconto(itemPed);
-            var valorTotal = itemPed.Valor - desconto;
-           
-            Assert.True(valorTotal.Equals(new decimal(6.90)), "Valor Deve Ser 6.90 o valor eh " + valorTotal);
+                        
+            Assert.True(new decimal(0).Equals(desconto), "Valor Deve Ser 0 o valor eh " + desconto);            
         }
     }
 }

@@ -9,6 +9,8 @@ namespace appLanche.Services
         List<Lanche> ListarLanches();        
         List<Ingrediente> ListarIngredientes();        
         ItemDoPedido GerarPedido(ItemDoPedido item);
-        List<Lanche> ObterLanche(int id);        
+        List<Lanche> ObterLanche(int id);
+
+        ItemDoPedido CalcularValorDoPedido(ItemDoPedido item);
     }
 }

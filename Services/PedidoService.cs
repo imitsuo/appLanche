@@ -24,7 +24,7 @@ namespace appLanche.Services
             this.IngredienteRepository = ingredienteRepository;
             this.PromocaoRepository = promocaoRepository;
         }
-        public ItemDoPedido GerarPedido(ItemDoPedido item)
+        public ItemDoPedido CalcularValorDoPedido(ItemDoPedido item)
         {
             var promocoes = this.PromocaoRepository.GetAll().ToList();
 
@@ -47,6 +47,12 @@ namespace appLanche.Services
 
             //throw new System.NotImplementedException();
         }
+
+        public ItemDoPedido GerarPedido(ItemDoPedido item)
+        {
+            return this.ItemDoPedidoRepository.Insert(item);
+        }
+    
 
         public List<Ingrediente> ListarIngredientes()
         {

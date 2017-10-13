@@ -35,7 +35,7 @@
             </select>
             </div>
         </div>
-        <div class="row">
+        <!--div class="row">
             <div class="col-sm-4">
                 <label for="Ingredientes" >Ingredientes Adicionais</label>                          
                 <select id="IngredientesAdicionaisDisponiveis" multiple class="form-control">
@@ -47,39 +47,68 @@
             <select id="IngredientesAdicionais" name="IngredientesAdicionais" multiple class="form-control">                
             </select>
             </div>
-        </div>
-<p></p>
-
-<button type="submit"  class="btn btn-success">Calcular Valor</button>
-
-</form>
-        <table class='table table-hover'>
+        </div -->
+<h3 id="ItensAdicionais">Itens Adicionais</h3>
+     <table class='table table-hover' id="tableIngredientes">
         <thead>
             <tr>
-                <th>Promocoes</th>        
-                
+                <th style = "display:none">Id</th>
+                <th>Ingrediente</th>
+                <th>Quantidade</th> 
+                <th></th> 
+                <th></th>                
             </tr>
         </thead>
         <tbody>
-            @foreach(var l in @Model.Lanches)
-            {
-                <tr>
-                    <td>@l.Nome</td>                       
-                </tr>
-            }
+           
+        </tbody>
+        </table>
+<p></p>
+
+<button class="btn btn-success" onclick="calcularPreco();return false;">Calcular Valor</button>
+<p></p>
+</form>
+        <table class='table table-hover' id="tablePromocoes">
+        <thead>
+            <tr>
+                <th>Promocoes</th>        
+                <th>Valor</th>
+            </tr>
+        </thead>
+        <tbody> 
+            <tr><td></td><td></td></tr>           
         </tbody>
         </table>
        
         <label for="name">Valor Lanche</label>  
-        <input id="name" type="text" class="form-control" disabled>
+        <input type="text" class="form-control" id="ValorLanche" disabled>
       
         <label for="name">Valor Total</label>  
-        <input id="name" type="text" class="form-control" disabled>
-        
-    
-    
+        <input type="text" class="form-control" id="ValorTotal" disabled>
+     <p></p>      
+    <button class="btn btn-success" onclick="calcularPreco();return false;">Fechar Pedido</button>
     </div>
 </div>
+
+
+  <div class="modal fade" id="modalPedido" role="dialog">
+    <div class="modal-dialog">
+    
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Pedido</h4>
+        </div>
+        <div class="modal-body">
+          <p id="TextoModal"> Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" onclick="location.href='/pedido'">OK</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 
 @section scripts {
 <script type="text/javascript">
@@ -124,26 +153,87 @@
                 console.log(data); 
                 data.forEach(function(item)
                 {
-                    $('#IngredientesAdicionaisDisponiveis')
+                    /*$('#IngredientesAdicionaisDisponiveis')
                         .append($('<option>', {value: item.id, text: item.nome, onclick : "adicionarIngrediente(this);"}));
+                    */
+                    var adiciona = '<a href="#ItensAdicionais" onClick="addIngrediente(this);return false;">Adicionar</a>';
+                    var remove = '<a href="#ItensAdicionais" onClick="SubIngrediente(this);return false;">Remover</a>';
+
+                    $('#tableIngredientes tr:last').after('<tr><td style ="display:none">'+item.id+'</td><td>'+item.nome+'</td><td name="quantidade">0</td><td>'+ adiciona +'</td><td>'+remove+'</td></tr>');
                 });
             });
     }
 
+    function addIngrediente(val)
+    {  
+       
+        var value = Number($(val).parent().parent()[0].children[2].textContent);
+
+        $(val).parent().parent()[0].children[2].textContent = value +1;
+    }
+
+     function SubIngrediente(val)
+    {               
+        var value = Number($(val).parent().parent()[0].children[2].textContent);
+        if(value > 0)
+            $(val).parent().parent()[0].children[2].textContent = value -1;
+    }
+
     function calcularPreco()
     {
+        var ingredienteAdicionais = [];
+
+        $('#tableIngredientes TR').each(function(index, value) { 
+            if(index > 0) 
+            {
+                if(!isNaN(value.children[2].textContent) && 
+                    Number(value.children[2].textContent) > 0 )
+                {
+                    var qtd = Number(value.children[2].textContent);
+                    for(i=0;i< qtd; i++)
+                    {
+                      ingredienteAdicionais.push(value.children[0].textContent)  ;
+                    }
+                }
+            }
+        });
+
         var model =
         {
             LancheId : $('#LancheId').val(),
             IngredientesRemovidos : getValueFromSelect("IngredientesRemovidos"),
-            IngredientesAdicionais : getValueFromSelect("IngredientesAdicionais")
-        }
+            IngredientesAdicionais : ingredienteAdicionais
+        }    
 
         console.log(model);
 
+        var itemPedido;
         $.post("/Pedido/CalcularPreco",
         model
-        ,function(data){console.log(data);});
+        ,function(data)
+            {
+                itemPedido = data;
+                console.log(data);
+
+                $('#ValorLanche').val(data.valor);
+                $('#ValorTotal').val(data.valorTotal);
+
+                $('#tablePromocoes > tbody').html('');
+                data.descontos.forEach(function(item)
+                {                    
+                    $('#tablePromocoes tbody').append('<tr><td>'+item.promocao.nome+'</td><td >'+ item.valor+'</td></tr>');
+                });
+            });
+
+        return itemPedido;
+    }
+
+    function FinalizarPedido()
+    {
+        var item = calcularPreco();
+        console.log('modal')
+        $('#TextoModal').html('O numero do seu pedido eh ' + item.id);
+        $("#modalPedido").modal();
     }
 
     function getValueFromSelect(select)
