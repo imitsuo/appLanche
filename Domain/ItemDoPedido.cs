@@ -10,18 +10,27 @@ namespace appLanche.Domain
 
         public decimal Valor {
             get{
-                return (Item.Valor + IngredientesAdicionais.Sum(i => i.Valor))  - IngredientesRemovidos.Sum(i => i.Valor);
+                return 
+                 (Item.Valor + IngredientesAdicionais.Sum(i => i.Valor))  
+                 - IngredientesRemovidos.Sum(i => i.Valor);
             } 
         }
 
-        public decimal ValorTotal {get; set;}
+        public decimal ValorTotal {
+            get{
+                return 
+                 (Item.Valor + IngredientesAdicionais.Sum(i => i.Valor))  
+                 - IngredientesRemovidos.Sum(i => i.Valor)
+                 - Descontos.Sum(d => d.Valor);
+            } 
+        }
         
         public Lanche Item {get; protected set;}
 
         public List<Ingrediente> IngredientesAdicionais{get; protected set;}
 
         public List<Ingrediente> IngredientesRemovidos{get; protected set;}
-
+        public List<Desconto> Descontos {get; protected set;}
         private ItemDoPedido()
         {}
 
@@ -29,7 +38,7 @@ namespace appLanche.Domain
         {
             this.IngredientesAdicionais = new List<Ingrediente>();
             this.IngredientesRemovidos = new List<Ingrediente>();
-            
+            this.Descontos = new  List<Desconto>();
             this.Item = item;
         }
 
@@ -48,6 +57,11 @@ namespace appLanche.Domain
 
 
             IngredientesRemovidos.Add(ingrediente);
+        }
+
+        public void AdicionarDesconto(decimal valor, Promocao promo)
+        {
+            this.Descontos.Add(new Desconto(promo, valor));
         }
     }
 }

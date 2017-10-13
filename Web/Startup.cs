@@ -10,6 +10,7 @@ using appLanche.Domain;
 using appLanche.Infrastructure;
 using appLanche.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace appLanche.Web
 {
@@ -32,14 +33,23 @@ namespace appLanche.Web
             services.AddTransient<IRepository<Promocao>, Repository<Promocao>>();
             services.AddTransient<IPedidoService, PedidoService>();
             services.AddTransient<IDbInitializer, DbInitializer>();
-            services.AddMvc();
+            services.AddLogging();
+            services.AddMvc().AddJsonOptions(options => {
+            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env,ILoggerFactory loggerFactory)
         {
+
+            loggerFactory
+            .AddConsole(LogLevel.Debug)  // This will output to the console/terminal
+            .AddDebug(LogLevel.Debug);
+
             if (env.IsDevelopment())
             {
+                
                 app.UseDeveloperExceptionPage();
             }
             else

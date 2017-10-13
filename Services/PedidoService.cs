@@ -28,19 +28,22 @@ namespace appLanche.Services
         {
             var promocoes = this.PromocaoRepository.GetAll().ToList();
 
-            item.ValorTotal = item.Valor;
+            //item.ValorTotal = item.Valor;
 
             promocoes.ForEach(p =>
             {
                 var calculaDesconto = new CalculaPromocaoFactory()
                             .Criar(p);
 
-                item.ValorTotal -= calculaDesconto.CalculaDesconto(item);
+                var valor = calculaDesconto.CalculaDesconto(item);
+                if(valor > 0)
+                    item.AdicionarDesconto(valor, p);
+
             });
 
-            var ret = this.ItemDoPedidoRepository.Insert(item);
+            //var ret = this.ItemDoPedidoRepository.Insert(item);
 
-            return ret;
+            return item;
 
             //throw new System.NotImplementedException();
         }
@@ -52,7 +55,12 @@ namespace appLanche.Services
 
         public List<Lanche> ListarLanches()
         {
-            return LancheRepository.GetAll().ToList();
+            return LancheRepository.GetItems(null,"IngredienteLanche","IngredienteLanche.Lanche", "IngredienteLanche.Ingrediente");            
+        }
+
+        public List<Lanche> ObterLanche(int id)
+        {
+            return LancheRepository.GetItems(l => l.Id == id,"IngredienteLanche","IngredienteLanche.Lanche", "IngredienteLanche.Ingrediente");            
         }
     }
 }

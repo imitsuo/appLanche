@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace appLanche.Domain
 {
@@ -9,7 +10,8 @@ namespace appLanche.Domain
         public string Nome {get; protected set;}
 
         public decimal Valor {get; protected set;}
-
+                
+        //public List<IngredienteLanche> IngredienteLanche {get; protected set;}
         private Ingrediente()
         {}
         
@@ -18,10 +20,12 @@ namespace appLanche.Domain
             this.Id = id;
             this.Nome = nome;
             this.Valor = valor;
+            //this.IngredienteLanche = new List<IngredienteLanche>();
         }
 
         public Ingrediente(string nome, decimal valor)
         {
+            //this.IngredienteLanche = new List<IngredienteLanche>();
          //   this.ID = id;
             this.Nome = nome;
             this.Valor = valor;

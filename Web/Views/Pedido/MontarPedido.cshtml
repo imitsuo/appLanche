@@ -1,0 +1,160 @@
+@model PedidoModel
+
+@{
+    ViewData["Title"] = "Pedido";
+}
+
+
+
+
+<div class='col-sm-8'>
+<h2>Pedido</h2>
+
+    <div class="form-group">
+<form name="formPedido" id="formPedido">
+        <input id="LancheId" value="@Model.Item.Item.Id" hidden>
+        <label for="name">Lanche</label>  
+        <input id="name" type="text" class="form-control" value="@Model.Item.Item.Nome" disabled>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <label for="Ingredientes" >Ingredientes</label>                          
+                <select id="IngredientesLanche" multiple class="form-control">
+                @foreach(var i in @Model.Item.Item.Ingredientes)
+                    {
+                        <option value="@i.Id" onclick="removerIngrediente(this);">@i.Nome</option>
+                    }
+                    
+                </select>
+            </div>
+
+            <div class="col-sm-4">
+            <label for="Ingredientes" >Ingredientes Removidos</label>                          
+            <select multiple name="IngredientesRemovidos" id="IngredientesRemovidos"  class="form-control">
+                 
+            </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <label for="Ingredientes" >Ingredientes Adicionais</label>                          
+                <select id="IngredientesAdicionaisDisponiveis" multiple class="form-control">
+                    
+                </select>
+            </div>
+            <div class="col-sm-4">
+            <label for="Ingredientes" >Ingredientes Adicionados</label>                          
+            <select id="IngredientesAdicionais" name="IngredientesAdicionais" multiple class="form-control">                
+            </select>
+            </div>
+        </div>
+<p></p>
+
+<button type="submit"  class="btn btn-success">Calcular Valor</button>
+
+</form>
+        <table class='table table-hover'>
+        <thead>
+            <tr>
+                <th>Promocoes</th>        
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var l in @Model.Lanches)
+            {
+                <tr>
+                    <td>@l.Nome</td>                       
+                </tr>
+            }
+        </tbody>
+        </table>
+       
+        <label for="name">Valor Lanche</label>  
+        <input id="name" type="text" class="form-control" disabled>
+      
+        <label for="name">Valor Total</label>  
+        <input id="name" type="text" class="form-control" disabled>
+        
+    
+    
+    </div>
+</div>
+
+@section scripts {
+<script type="text/javascript">
+    function removerIngrediente(val)
+    {
+        $('#IngredientesRemovidos')
+            .append($('<option>', {value: val.value, text: val.text, onclick : "retornarIngrediente(this);"}));
+        val.remove();
+    }
+
+    function retornarIngrediente(val)
+    {
+        $('#IngredientesLanche')
+            .append($('<option>', {value: val.value, text: val.text, onclick : "removerIngrediente(this);"}));
+        val.remove();
+    }
+
+    function adicionarIngrediente(val)
+    {
+        $('#IngredientesAdicionais')
+            .append($('<option>', {value: val.value, text: val.text, onclick : "removerIngredienteAdicional(this);"}));
+        val.remove();
+    }
+
+    function removerIngredienteAdicional(val)
+    {
+        $('#IngredientesAdicionaisDisponiveis')
+            .append($('<option>', {value: val.value, text: val.text, onclick : "adicionarIngrediente(this);"}));
+        val.remove();
+    }
+
+    $( document ).ready(function() {
+        listarIngredientes();
+    });
+
+    function listarIngredientes()
+    {
+       //$()
+
+       $.get('/Pedido/ListarIngredientes',
+            function(data){
+                console.log(data); 
+                data.forEach(function(item)
+                {
+                    $('#IngredientesAdicionaisDisponiveis')
+                        .append($('<option>', {value: item.id, text: item.nome, onclick : "adicionarIngrediente(this);"}));
+                });
+            });
+    }
+
+    function calcularPreco()
+    {
+        var model =
+        {
+            LancheId : $('#LancheId').val(),
+            IngredientesRemovidos : getValueFromSelect("IngredientesRemovidos"),
+            IngredientesAdicionais : getValueFromSelect("IngredientesAdicionais")
+        }
+
+        console.log(model);
+
+        $.post("/Pedido/CalcularPreco",
+        model
+        ,function(data){console.log(data);});
+    }
+
+    function getValueFromSelect(select)
+    {
+        var arr = [];
+
+        $("#" + select + " > option").each(function(){
+            arr.push(this.value);
+        });
+
+        return arr;
+    }
+</script>
+}
