@@ -86,7 +86,7 @@
         <label for="name">Valor Total</label>  
         <input type="text" class="form-control" id="ValorTotal" disabled>
      <p></p>      
-    <button class="btn btn-success" onclick="calcularPreco();return false;">Fechar Pedido</button>
+    <button class="btn btn-success" id="FecharPedido" onclick="gerarPedido();return false;">Fechar Pedido</button>
     </div>
 </div>
 
@@ -181,6 +181,57 @@
 
     function calcularPreco()
     {
+        /*var ingredienteAdicionais = [];
+
+        $('#tableIngredientes TR').each(function(index, value) { 
+            if(index > 0) 
+            {
+                if(!isNaN(value.children[2].textContent) && 
+                    Number(value.children[2].textContent) > 0 )
+                {
+                    var qtd = Number(value.children[2].textContent);
+                    for(i=0;i< qtd; i++)
+                    {
+                      ingredienteAdicionais.push(value.children[0].textContent)  ;
+                    }
+                }
+            }
+        });
+
+        var model =
+        {
+            LancheId : $('#LancheId').val(),
+            IngredientesRemovidos : getValueFromSelect("IngredientesRemovidos"),
+            IngredientesAdicionais : ingredienteAdicionais
+        } */
+
+        var model = this.montarModel();   
+
+        console.log(model);
+
+        
+
+        $.post("/Pedido/CalcularPreco",
+        model
+        ,function(data)
+            {
+                itemPedido = data;
+                console.log(data);
+
+                $('#ValorLanche').val(data.valor);
+                $('#ValorTotal').val(data.valorTotal);
+
+                $('#tablePromocoes > tbody').html('');
+                data.descontos.forEach(function(item)
+                {                    
+                    $('#tablePromocoes tbody').append('<tr><td>'+item.promocao.nome+'</td><td >'+ item.valor+'</td></tr>');
+                });
+                
+            });
+    }
+
+    function montarModel()
+    {
         var ingredienteAdicionais = [];
 
         $('#tableIngredientes TR').each(function(index, value) { 
@@ -203,38 +254,28 @@
             LancheId : $('#LancheId').val(),
             IngredientesRemovidos : getValueFromSelect("IngredientesRemovidos"),
             IngredientesAdicionais : ingredienteAdicionais
-        }    
+        }
 
-        console.log(model);
+        return model;
+    }
 
-        var itemPedido;
-        $.post("/Pedido/CalcularPreco",
+    
+    function gerarPedido()
+    {
+        
+        var model = this.montarModel();
+
+        $.post("/Pedido/GerarPedido",
         model
         ,function(data)
             {
-                itemPedido = data;
                 console.log(data);
-
-                $('#ValorLanche').val(data.valor);
-                $('#ValorTotal').val(data.valorTotal);
-
-                $('#tablePromocoes > tbody').html('');
-                data.descontos.forEach(function(item)
-                {                    
-                    $('#tablePromocoes tbody').append('<tr><td>'+item.promocao.nome+'</td><td >'+ item.valor+'</td></tr>');
-                });
+                $('#TextoModal').html('O numero do seu pedido eh ' + data.id);
+                $("#modalPedido").modal();
             });
+    }   
 
-        return itemPedido;
-    }
 
-    function FinalizarPedido()
-    {
-        var item = calcularPreco();
-        console.log('modal')
-        $('#TextoModal').html('O numero do seu pedido eh ' + item.id);
-        $("#modalPedido").modal();
-    }
 
     function getValueFromSelect(select)
     {

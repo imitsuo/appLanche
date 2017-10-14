@@ -80,8 +80,9 @@ namespace appLanche.Web.Controllers
         }
 
         [HttpPost]
-        public ItemDoPedido GerarPedido(ItemDoPedido item)
+        public ItemDoPedido GerarPedido(MontarPedidoModel model)
         {
+            var item = this.CalcularPreco(model);
             return pedidoService.GerarPedido(item);
         }
 
