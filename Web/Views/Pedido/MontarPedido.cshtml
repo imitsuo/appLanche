@@ -35,19 +35,7 @@
             </select>
             </div>
         </div>
-        <!--div class="row">
-            <div class="col-sm-4">
-                <label for="Ingredientes" >Ingredientes Adicionais</label>                          
-                <select id="IngredientesAdicionaisDisponiveis" multiple class="form-control">
-                    
-                </select>
-            </div>
-            <div class="col-sm-4">
-            <label for="Ingredientes" >Ingredientes Adicionados</label>                          
-            <select id="IngredientesAdicionais" name="IngredientesAdicionais" multiple class="form-control">                
-            </select>
-            </div>
-        </div -->
+       
 <h3 id="ItensAdicionais">Itens Adicionais</h3>
      <table class='table table-hover' id="tableIngredientes">
         <thead>
@@ -146,16 +134,12 @@
 
     function listarIngredientes()
     {
-       //$()
 
        $.get('/Pedido/ListarIngredientes',
             function(data){
                 console.log(data); 
                 data.forEach(function(item)
-                {
-                    /*$('#IngredientesAdicionaisDisponiveis')
-                        .append($('<option>', {value: item.id, text: item.nome, onclick : "adicionarIngrediente(this);"}));
-                    */
+                {                    
                     var adiciona = '<a href="#ItensAdicionais" onClick="addIngrediente(this);return false;">Adicionar</a>';
                     var remove = '<a href="#ItensAdicionais" onClick="SubIngrediente(this);return false;">Remover</a>';
 
@@ -180,30 +164,7 @@
     }
 
     function calcularPreco()
-    {
-        /*var ingredienteAdicionais = [];
-
-        $('#tableIngredientes TR').each(function(index, value) { 
-            if(index > 0) 
-            {
-                if(!isNaN(value.children[2].textContent) && 
-                    Number(value.children[2].textContent) > 0 )
-                {
-                    var qtd = Number(value.children[2].textContent);
-                    for(i=0;i< qtd; i++)
-                    {
-                      ingredienteAdicionais.push(value.children[0].textContent)  ;
-                    }
-                }
-            }
-        });
-
-        var model =
-        {
-            LancheId : $('#LancheId').val(),
-            IngredientesRemovidos : getValueFromSelect("IngredientesRemovidos"),
-            IngredientesAdicionais : ingredienteAdicionais
-        } */
+    {      
 
         var model = this.montarModel();   
 
@@ -270,7 +231,7 @@
         ,function(data)
             {
                 console.log(data);
-                $('#TextoModal').html('O numero do seu pedido eh ' + data.id);
+                $('#TextoModal').html('O número do seu pedido é ' + data.id);
                 $("#modalPedido").modal();
             });
     }   
