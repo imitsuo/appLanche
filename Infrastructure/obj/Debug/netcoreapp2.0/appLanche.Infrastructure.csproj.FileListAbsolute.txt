@@ -8,3 +8,13 @@
 /home/marcelo/projetos/appLanche/Infrastructure/obj/Debug/netcoreapp2.0/appLanche.Infrastructure.AssemblyInfo.cs
 /home/marcelo/projetos/appLanche/Infrastructure/obj/Debug/netcoreapp2.0/appLanche.Infrastructure.dll
 /home/marcelo/projetos/appLanche/Infrastructure/obj/Debug/netcoreapp2.0/appLanche.Infrastructure.pdb
+/home/marcelo/projetos/teste2/appLanche/Infrastructure/bin/Debug/netcoreapp2.0/appLanche.Infrastructure.deps.json
+/home/marcelo/projetos/teste2/appLanche/Infrastructure/bin/Debug/netcoreapp2.0/appLanche.Infrastructure.dll
+/home/marcelo/projetos/teste2/appLanche/Infrastructure/bin/Debug/netcoreapp2.0/appLanche.Infrastructure.pdb
+/home/marcelo/projetos/teste2/appLanche/Infrastructure/bin/Debug/netcoreapp2.0/appLanche.Domain.dll
+/home/marcelo/projetos/teste2/appLanche/Infrastructure/bin/Debug/netcoreapp2.0/appLanche.Domain.pdb
+/home/marcelo/projetos/teste2/appLanche/Infrastructure/obj/Debug/netcoreapp2.0/appLanche.Infrastructure.csproj.CoreCompileInputs.cache
+/home/marcelo/projetos/teste2/appLanche/Infrastructure/obj/Debug/netcoreapp2.0/appLanche.Infrastructure.AssemblyInfoInputs.cache
+/home/marcelo/projetos/teste2/appLanche/Infrastructure/obj/Debug/netcoreapp2.0/appLanche.Infrastructure.AssemblyInfo.cs
+/home/marcelo/projetos/teste2/appLanche/Infrastructure/obj/Debug/netcoreapp2.0/appLanche.Infrastructure.dll
+/home/marcelo/projetos/teste2/appLanche/Infrastructure/obj/Debug/netcoreapp2.0/appLanche.Infrastructure.pdb

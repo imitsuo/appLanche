@@ -6284,11 +6284,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/marcelo/projetos/appLanche/Tests/appLanche.Tests.csproj",
+      "projectUniqueName": "/home/marcelo/projetos/teste2/appLanche/Tests/appLanche.Tests.csproj",
       "projectName": "appLanche.Tests",
-      "projectPath": "/home/marcelo/projetos/appLanche/Tests/appLanche.Tests.csproj",
+      "projectPath": "/home/marcelo/projetos/teste2/appLanche/Tests/appLanche.Tests.csproj",
       "packagesPath": "/home/marcelo/.nuget/packages/",
-      "outputPath": "/home/marcelo/projetos/appLanche/Tests/obj/",
+      "outputPath": "/home/marcelo/projetos/teste2/appLanche/Tests/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/share/dotnet/sdk/NuGetFallbackFolder"
@@ -6305,11 +6305,11 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "/home/marcelo/projetos/appLanche/Services/appLanche.Services.csproj": {
-              "projectPath": "/home/marcelo/projetos/appLanche/Services/appLanche.Services.csproj"
+            "/home/marcelo/projetos/teste2/appLanche/Services/appLanche.Services.csproj": {
+              "projectPath": "/home/marcelo/projetos/teste2/appLanche/Services/appLanche.Services.csproj"
             },
-            "/home/marcelo/projetos/appLanche/Domain/appLanche.Domain.csproj": {
-              "projectPath": "/home/marcelo/projetos/appLanche/Domain/appLanche.Domain.csproj"
+            "/home/marcelo/projetos/teste2/appLanche/Domain/appLanche.Domain.csproj": {
+              "projectPath": "/home/marcelo/projetos/teste2/appLanche/Domain/appLanche.Domain.csproj"
             }
           }
         }

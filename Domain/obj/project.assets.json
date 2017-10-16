@@ -670,11 +670,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/marcelo/projetos/appLanche/Domain/appLanche.Domain.csproj",
+      "projectUniqueName": "/home/marcelo/projetos/teste2/appLanche/Domain/appLanche.Domain.csproj",
       "projectName": "appLanche.Domain",
-      "projectPath": "/home/marcelo/projetos/appLanche/Domain/appLanche.Domain.csproj",
+      "projectPath": "/home/marcelo/projetos/teste2/appLanche/Domain/appLanche.Domain.csproj",
       "packagesPath": "/home/marcelo/.nuget/packages/",
-      "outputPath": "/home/marcelo/projetos/appLanche/Domain/obj/",
+      "outputPath": "/home/marcelo/projetos/teste2/appLanche/Domain/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/share/dotnet/sdk/NuGetFallbackFolder"

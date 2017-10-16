@@ -2803,11 +2803,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/marcelo/projetos/appLanche/Infrastructure/appLanche.Infrastructure.csproj",
+      "projectUniqueName": "/home/marcelo/projetos/teste2/appLanche/Infrastructure/appLanche.Infrastructure.csproj",
       "projectName": "appLanche.Infrastructure",
-      "projectPath": "/home/marcelo/projetos/appLanche/Infrastructure/appLanche.Infrastructure.csproj",
+      "projectPath": "/home/marcelo/projetos/teste2/appLanche/Infrastructure/appLanche.Infrastructure.csproj",
       "packagesPath": "/home/marcelo/.nuget/packages/",
-      "outputPath": "/home/marcelo/projetos/appLanche/Infrastructure/obj/",
+      "outputPath": "/home/marcelo/projetos/teste2/appLanche/Infrastructure/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/share/dotnet/sdk/NuGetFallbackFolder"
@@ -2824,8 +2824,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "/home/marcelo/projetos/appLanche/Domain/appLanche.Domain.csproj": {
-              "projectPath": "/home/marcelo/projetos/appLanche/Domain/appLanche.Domain.csproj"
+            "/home/marcelo/projetos/teste2/appLanche/Domain/appLanche.Domain.csproj": {
+              "projectPath": "/home/marcelo/projetos/teste2/appLanche/Domain/appLanche.Domain.csproj"
             }
           }
         }

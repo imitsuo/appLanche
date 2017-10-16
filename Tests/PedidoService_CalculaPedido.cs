@@ -57,7 +57,7 @@ namespace appLanche.Tests
 
             
             
-            var ret = service.GerarPedido(itemPed);
+            var ret = service.CalcularValorDoPedido(itemPed);
             
 
             Assert.True(ret.Descontos.Count > 0);
@@ -107,7 +107,7 @@ namespace appLanche.Tests
 
             
             
-            var ret = service.GerarPedido(itemPed);
+            var ret = service.CalcularValorDoPedido(itemPed);
 
              
             Assert.True(ret.ValorTotal.Equals(new decimal(17.90)), "Valor Deve Ser 17.90 o valor eh " + ret.ValorTotal);
